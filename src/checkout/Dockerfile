@@ -6,6 +6,8 @@ FROM golang:1.22-alpine AS builder
 
 WORKDIR /usr/src/app/
 
+COPY . .
+
 RUN --mount=type=cache,target=/go/pkg/mod/ \
     --mount=type=bind,source=./src/checkout/go.sum,target=go.sum \
     --mount=type=bind,source=./src/checkout/go.mod,target=go.mod \
