@@ -76,16 +76,17 @@ jobs:
         - name: checkout code
           uses: actions/checkout@v4
           with:
+            ref: main
             token: ${{ secrets.GITHUB_TOKEN }}
 
         - name: update name in k8s deployment
           run: |
-            sed -i 's/image: .*/image:${{ secrets.DOCKER_USERNAME }}/checkout:${{ github.run_id }}/g' /kubernetes/checkout/deploy.yaml
+            sed -i 's|image: .*|image:${{ secrets.DOCKER_USERNAME }}/checkout:${{ github.run_id }}|g' kubernetes/checkout/deploy.yaml
 
         - name: Commit and push changes
           run: |
             git config --global user.email "sohamkanoj55@gmail.com"
-            git config --local user.name "Soham kanoj"
-            git add /kubernetes/checkout/deploy.yaml
-            git commit -m "Update image tag to ${{ github.run_id }}"
-            git push origin main 
+            git config --global user.name "Soham kanoj"
+            git add .
+            git diff --cached --quiet || git commit -m "Update image tag to ${{ github.run_id }}"
+            git push origin main
