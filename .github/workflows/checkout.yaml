@@ -88,5 +88,5 @@ jobs:
             git config --global user.email "sohamkanoj55@gmail.com"
             git config --global user.name "Soham kanoj"
             git add .
-            git commit -m "Update image tag to ${{ github.run_id }}"
+            git diff --cached --quiet || git commit -m "Update image tag to ${{ github.run_id }}"
             git push origin main
