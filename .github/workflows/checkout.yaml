@@ -4,6 +4,8 @@ name: checkout-ci
 
 on:
     pull_request:
+        paths:
+        - 'src/checkout/**'
         branches:
         - main
 
