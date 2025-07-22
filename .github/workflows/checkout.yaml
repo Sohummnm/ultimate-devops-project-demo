@@ -89,4 +89,4 @@ jobs:
             git config --global user.name "Soham kanoj"
             git add .
             git commit -m "Update image tag to ${{ github.run_id }}"
-            git push origin main 
+            git push origin main
