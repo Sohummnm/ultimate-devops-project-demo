@@ -8,17 +8,11 @@ WORKDIR /usr/src/app/
 
 COPY . .
 
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,source=./src/checkout/go.sum,target=go.sum \
-    --mount=type=bind,source=./src/checkout/go.mod,target=go.mod \
-    go mod download
+RUN go mod download
 
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=cache,target=/root/.cache/go-build \
-    --mount=type=bind,rw,source=./src/checkout,target=. \
-    go build -ldflags "-s -w" -o /go/bin/checkout/ ./
+RUN go build -o /go/bin/checkout/ .
 
-FROM alpine
+FROM alpine AS release
 
 WORKDIR /usr/src/app/
 
