@@ -86,6 +86,6 @@ jobs:
           run: |
             git config --global user.email "sohamkanoj55@gmail.com"
             git config --local user.name "Soham kanoj"
-            git add /kubernetes/checkout/deploy.yaml
+            git add .
             git commit -m "Update image tag to ${{ github.run_id }}"
             git push origin main 
