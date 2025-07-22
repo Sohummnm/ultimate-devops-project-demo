@@ -76,6 +76,7 @@ jobs:
         - name: checkout code
           uses: actions/checkout@v4
           with:
+            ref: main
             token: ${{ secrets.GITHUB_TOKEN }}
 
         - name: update name in k8s deployment
@@ -85,7 +86,7 @@ jobs:
         - name: Commit and push changes
           run: |
             git config --global user.email "sohamkanoj55@gmail.com"
-            git config --local user.name "Soham kanoj"
+            git config --global user.name "Soham kanoj"
             git add .
             git commit -m "Update image tag to ${{ github.run_id }}"
             git push origin main 
