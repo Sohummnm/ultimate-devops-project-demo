@@ -1,0 +1,91 @@
+#CI for checkout application
+
+name: checkout-ci
+
+on:
+    pull_request:
+        branches:
+        - main
+
+jobs:
+    code-quality:
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout code
+          uses: actions/checkout@v4
+
+        - name: Stetup Go 1.22
+          uses: actions/setup-go@v2
+          with:
+            go-version: 1.22
+        
+        - name: Run golingci-lint
+          uses: golangci/golangci-lint-action@v6
+          with:
+            version: v1.55.2
+            working-directory: src/checkout
+        
+    unit-tests:
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup Go 1.22
+          uses: actions/setup-go@v2
+          with:
+            go-version: 1.22
+        
+        - name: unit tests
+          run: |    
+            cd src/checkout
+            go mod download
+            go test ./...
+
+    Docker-push:
+        runs-on: ubuntu-latest
+        needs: unit-tests
+
+        steps:
+        - name: checkout code
+          uses: actions/checkout@v4
+
+        - name: Install Docker
+          uses: docker/setup-buildx-action@v2
+
+        - name: Login to DockerHub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+
+        - name: Build and push Docker image
+          uses: docker/build-push-action@v4
+          with:
+            context: src/checkout
+            file: src/checkout/Dockerfile
+            push: true
+            tags: ${{ secrets.DOCKER_USERNAME }}/checkout:${{ github.run_id}}
+
+
+    update-k8s:
+        runs-on: ubuntu-latest
+        needs: Docker-push
+
+        steps:
+        - name: checkout code
+          uses: actions/checkout@v4
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: update name in k8s deployment
+          run: |
+            sed -i 's/image: .*/image:${{ secrets.DOCKER_USERNAME }}/checkout:${{ github.run_id }}/g' /kubernetes/checkout/deploy.yaml
+
+        - name: Commit and push changes
+          run: |
+            git config --global user.email "sohamkanoj55@gmail.com"
+            git config --local user.name "Soham kanoj"
+            git add /kubernetes/checkout/deploy.yaml
+            git commit -m "Update image tag to ${{ github.run_id }}"
+            git push origin main 
