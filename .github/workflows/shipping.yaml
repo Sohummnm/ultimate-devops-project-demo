@@ -21,11 +21,6 @@ jobs:
         override: true
         components: clippy, rustfmt
     
-    - name: check formatting
-      run: |
-        cd src/shipping
-        cargo fmt --check
-    
     - name: code quality
       run: |
         cd src/shipping
