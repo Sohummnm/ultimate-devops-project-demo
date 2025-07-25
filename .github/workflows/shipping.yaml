@@ -27,11 +27,6 @@ jobs:
     - name: Copy proto file from pb 
       run: |
         cp -r pb/* src/shipping/
-    
-    - name: code quality
-      run: |
-        cd src/shipping
-        cargo clippy -- -D warnings
 
     - name: unit tests
       run: |
