@@ -8,7 +8,7 @@ ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
 COPY . /app/
-COPY pb/ /app/proto/
+COPY demo* /app/proto/
 RUN echo Building on ${BUILDPLATFORM} for ${TARGETPLATFORM}
 
 # Check if we are doing cross-compilation, if so we need to add in some more dependencies and run rustup
