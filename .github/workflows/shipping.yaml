@@ -19,7 +19,7 @@ jobs:
       with:
         toolchain: stable
         override: true
-        components: clippy, fmt
+        components: clippy, rustfmt
     
     - name: check formatting
       run: cargo fmt --check
