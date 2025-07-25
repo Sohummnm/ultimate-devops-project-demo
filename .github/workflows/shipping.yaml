@@ -4,6 +4,8 @@ name: shipping-ci
 
 on:
   pull_request:
+    paths:
+    - 'src/shipping/**'
     branches:
     - main
 
