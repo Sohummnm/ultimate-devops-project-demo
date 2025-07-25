@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package main
 
+// Package main implements the checkout service for the OpenTelemetry demo application.
 import (
 	"bytes"
 	"context"

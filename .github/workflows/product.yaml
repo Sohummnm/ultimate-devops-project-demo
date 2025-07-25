@@ -4,6 +4,8 @@ name: product-catalog-ci
 
 on: 
     pull_request:
+        paths:
+        - 'src/product-catalog/**'
         branches:
         - main
 
