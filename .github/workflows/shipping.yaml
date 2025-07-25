@@ -20,6 +20,10 @@ jobs:
         toolchain: stable
         override: true
         components: clippy, rustfmt
+
+    - name: Copy proto file from pb 
+      run: |
+        cp -r pb/* src/shipping/
     
     - name: code quality
       run: |
