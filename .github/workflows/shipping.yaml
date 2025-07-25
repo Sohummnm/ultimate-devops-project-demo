@@ -65,7 +65,8 @@ jobs:
         file: src/shipping/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/shipping:${{ github.run_id }}
-        
+        cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/shipping:cache
+        cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/shipping:cache,mode=max
   updateK8s:
     runs-on: ubuntu-latest
     needs: Docker
