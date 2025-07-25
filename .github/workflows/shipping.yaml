@@ -22,7 +22,9 @@ jobs:
         components: clippy, rustfmt
     
     - name: check formatting
-      run: cargo fmt --check
+      run: |
+        cd src/shipping
+        cargo fmt --check
     
     - name: code quality
       run: cargo clippy -- -D warnings
