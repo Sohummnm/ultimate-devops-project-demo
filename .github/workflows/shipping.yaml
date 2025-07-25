@@ -55,7 +55,7 @@ jobs:
     - name: Copy proto file from pb 
       run: |
         cd pb/
-        cp . /src/shipping/
+        cp -r . /src/shipping/
     
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
