@@ -83,7 +83,7 @@ jobs:
 
     - name: commit and push changes
       run: |
-        git config --local user.email "sohamkanoj55@gmail.com"
+        git config --local user.email "donationcovid2019@gmail.com"
         git config --local user.name "Soham Kanoj"
         git add .
         git commit -m "Update image tag to ${{secrets.DOCKER_USERNAME}}/shipping:${{github.run_id}}"
