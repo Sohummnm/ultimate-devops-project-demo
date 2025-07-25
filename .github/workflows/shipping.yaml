@@ -27,13 +27,18 @@ jobs:
         cargo fmt --check
     
     - name: code quality
-      run: cargo clippy -- -D warnings
+      run: |
+        cd src/shipping
+        cargo clippy -- -D warnings
 
     - name: unit tests
-      run: cargo test --verbose 
+      run: |
+        cd src/shipping
+        cargo test --verbose 
 
     - name: build
-      run: cargo build --release
+      run: |
+        cd src/shippingcargo build --release
 
   Docker:
     runs-on: ubuntu-latest
