@@ -23,10 +23,10 @@ jobs:
         cache: gradle
     
     - name: build with gradle and run tests
-      run: gradle clean build
+      run: ./gradlew clean build
 
     - name: SonarCloud Scan
-      run: gradle sonarqube
+      run: ./gradlew sonarqube
       env: 
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
