@@ -10,7 +10,7 @@ on:
       - "src/ad/**"
 
 jobs:
-  Unit-tests&code-analysis:
+  Unit-tests-code-analysis:
     runs-on: ubuntu-latest
     steps:
     - name: checkout code
