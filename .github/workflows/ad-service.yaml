@@ -40,7 +40,7 @@ jobs:
  
   Docker-build-push:
     runs-on: ubuntu-latest
-    needs: [Unit tests & code-analysis]
+    needs: [Unit-tests-code-analysis]
     
     steps:
     - name: checkout code
@@ -70,7 +70,7 @@ jobs:
 
   update-k8s:
     runs-on: ubuntu-latest
-    needs: [Docker build and push]
+    needs: [Docker-build-push]
 
     steps:
     - name: checkout code
