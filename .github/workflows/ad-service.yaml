@@ -62,7 +62,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: src/ad
-        file: */Dockerfile
+        file: src/ad/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME}}/ad-service:${{ github.run_id }}
         cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME}}/ad-service:cache
