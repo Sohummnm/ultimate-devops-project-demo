@@ -29,7 +29,10 @@ jobs:
         ./gradlew clean build -x verifyGoogleJavaFormat
 
     - name: SonarCloud Scan
-      run: ./gradlew sonarqube
+      run: |
+        cd src/ad/
+        ls -l
+        ./gradlew sonarqube
       env: 
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
