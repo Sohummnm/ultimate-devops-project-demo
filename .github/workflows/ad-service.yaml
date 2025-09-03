@@ -10,7 +10,7 @@ on:
       - "src/ad/**"
 
 jobs:
-  Unit tests & code-analysis:
+  Unit-tests&code-analysis:
     runs-on: ubuntu-latest
     steps:
     - name: checkout code
@@ -38,7 +38,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
-  Docker build and push:
+  Docker-build-push:
     runs-on: ubuntu-latest
     needs: [Unit tests & code-analysis]
     
