@@ -23,7 +23,9 @@ jobs:
         cache: gradle
     
     - name: build with gradle and run tests
-      run: ./gradlew clean build
+      run: |
+        ls -l
+        ./gradlew clean build
 
     - name: SonarCloud Scan
       run: ./gradlew sonarqube
