@@ -24,6 +24,7 @@ jobs:
     
     - name: build with gradle and run tests
       run: |
+        cd src/ad/
         ls -l
         ./gradlew clean build
 
