@@ -81,7 +81,7 @@ jobs:
 
     - name: update k8s deployment
       run: |
-        sed -i "s|image: .*|image: '${{ secrets.DOCKER_USERNAME }}/Ad-service:${{ github.run_id }}'|g" deploy.yaml
+        sed -i "s|image: .*|image: '${{ secrets.DOCKER_USERNAME }}/Ad-service:${{ github.run_id }}'|g" kubernetes/ad/deploy.yaml
 
     - name: commit changes
       run: |
