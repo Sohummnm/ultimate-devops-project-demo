@@ -26,6 +26,7 @@ jobs:
       run: |
         cd src/ad/
         ls -l
+        ./gradlew googleJavaFormat
         ./gradlew clean build
 
     - name: SonarCloud Scan
